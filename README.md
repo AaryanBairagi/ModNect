@@ -238,51 +238,6 @@ Story                          Contact
 
 ## Project Screenshots
 
-<!-- <table>
-  <tr>
-    <td align="center" width="50%">
-      <img src="./docs/screenshots/1.png" alt="Landing Page" width="100%"/>
-      <br/><b>Landing Page</b>
-    </td>
-    <td align="center" width="50%">
-      <img src="./docs/screenshots/2.png" alt="Home Feed" width="100%"/>
-      <br/><b>Home Feed</b>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <img src="./docs/screenshots/4.png" alt="Create Post" width="100%"/>
-      <br/><b>Create Post</b>
-    </td>
-    <td align="center" width="50%">
-      <img src="./docs/screenshots/3.png" alt="Connections & 3D Graph" width="100%"/>
-      <br/><b>Connections & 3D Graph</b>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <img src="./docs/screenshots/5.png" alt="Real-Time Messaging" width="100%"/>
-      <br/><b>Real-Time Messaging</b>
-    </td>
-    <td align="center" width="50%">
-      <img src="./docs/screenshots/6.png" alt="Share Post" width="100%"/>
-      <br/><b>Share Post</b>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <img src="./docs/screenshots/7.png" alt="Twitter" width="100%"/>
-      <br/><b>Twitter</b>
-    </td>
-    <td align="center" width="50%">
-      <img src="./docs/screenshots/8.png" alt="Usage Analytics" width="100%"/>
-      <br/><b>Real-Time Notifications</b>
-    </td>
-  </tr>
-</table> -->
-
-## Project Screenshots
-
 <table>
   <tr>
     <td align="center" width="50%">
