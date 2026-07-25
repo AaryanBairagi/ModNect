@@ -238,7 +238,7 @@ Story                          Contact
 
 ## Project Screenshots
 
-<table>
+<!-- <table>
   <tr>
     <td align="center" width="50%">
       <img src="./docs/screenshots/1.png" alt="Landing Page" width="100%"/>
@@ -279,8 +279,117 @@ Story                          Contact
       <br/><b>Real-Time Notifications</b>
     </td>
   </tr>
-</table>
+</table> -->
 
+## Project Screenshots
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="./docs/screenshots/1.png" width="100%"/>
+      <br/><b>1</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="./docs/screenshots/2.png" width="100%"/>
+      <br/><b>2</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="./docs/screenshots/3.png" width="100%"/>
+      <br/><b>3</b>
+    </td>
+    <td align="center">
+      <img src="./docs/screenshots/4.png" width="100%"/>
+      <br/><b>4</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="./docs/screenshots/5.png" width="100%"/>
+      <br/><b>5</b>
+    </td>
+    <td align="center">
+      <img src="./docs/screenshots/6.png" width="100%"/>
+      <br/><b>6</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="./docs/screenshots/7.png" width="100%"/>
+      <br/><b>7</b>
+    </td>
+    <td align="center">
+      <img src="./docs/screenshots/8.png" width="100%"/>
+      <br/><b>8</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="./docs/screenshots/9.png" width="100%"/>
+      <br/><b>9</b>
+    </td>
+    <td align="center">
+      <img src="./docs/screenshots/10.png" width="100%"/>
+      <br/><b>10</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="./docs/screenshots/11.png" width="100%"/>
+      <br/><b>11</b>
+    </td>
+    <td align="center">
+      <img src="./docs/screenshots/12.png" width="100%"/>
+      <br/><b>12</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="./docs/screenshots/13.png" width="100%"/>
+      <br/><b>13</b>
+    </td>
+    <td align="center">
+      <img src="./docs/screenshots/14.png" width="100%"/>
+      <br/><b>14</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="./docs/screenshots/15.png" width="100%"/>
+      <br/><b>15</b>
+    </td>
+    <td align="center">
+      <img src="./docs/screenshots/16.png" width="100%"/>
+      <br/><b>16</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="./docs/screenshots/17.png" width="100%"/>
+      <br/><b>17</b>
+    </td>
+    <td align="center">
+      <img src="./docs/screenshots/18.png" width="100%"/>
+      <br/><b>18</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center" colspan="2">
+      <img src="./docs/screenshots/19.png" width="100%"/>
+      <br/><b>19</b>
+    </td>
+  </tr>
+</table>
 ---
 
 ## Local Development Setup

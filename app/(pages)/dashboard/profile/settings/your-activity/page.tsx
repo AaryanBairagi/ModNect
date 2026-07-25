@@ -62,14 +62,15 @@ const ActivityPage = () => {
     );
   }
 
-  return (
-    <div>
-      <SectionHeader
-        icon={<GoProjectRoadmap className="w-7 h-7" />}
-        title="Your Activity"
-      />
+return (
+  <main className="w-full min-h-screen bg-white/60 border border-white/30 rounded-xl overflow-hidden">
+    <SectionHeader
+      icon={<GoProjectRoadmap className="w-7 h-7" />}
+      title="Your Activity"
+    />
 
-      <div className="mt-7">
+    <div className="py-10">
+      <div className="mx-auto w-full max-w-2xl">
         <Posts
           currentUserId={userId || ""}
           mode="liked"
@@ -77,7 +78,8 @@ const ActivityPage = () => {
         />
       </div>
     </div>
-  );
+  </main>
+);
 };
 
 export default ActivityPage;

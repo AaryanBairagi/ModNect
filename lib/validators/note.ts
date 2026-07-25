@@ -9,8 +9,9 @@ export const CreateNoteSchema = z.object({
   description: z
     .string()
     .trim()
-    .min(1, "Description is required")
-    .max(5000),
+    .max(5000)
+    .optional()
+    .default(""),
 
   folder: z
     .string()
@@ -24,7 +25,6 @@ export const CreateNoteSchema = z.object({
     .datetime()
     .optional(),
 });
-
 
 export const UpdateNoteSchema = z.object({
   description: z

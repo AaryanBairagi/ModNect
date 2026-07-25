@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
     });
 
     const body = await req.json();
+    console.log("NOTES BODY : " , body);
     const validated = validate(CreateNoteSchema , body);
     if(!validated.success) return validated.response;
 
