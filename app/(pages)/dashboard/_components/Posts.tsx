@@ -189,11 +189,17 @@ export default function Posts({ currentUserId, userName , userProfileImageUrl , 
 
 
   useEffect(() => {
-    if(mode==='liked' && initialPosts){
-      setPosts(initialPosts);
-      setLoading(false);
-      return;
-    }
+    // if(mode==='liked' && initialPosts){
+    //   setPosts(initialPosts);
+    //   setLoading(false);
+    //   return;
+    // }
+
+    if (initialPosts) {
+    setPosts(initialPosts);
+    setLoading(false);
+    return;
+}
 
     if(!currentUserId) return;
     fetchPosts(null);
@@ -857,7 +863,7 @@ export default function Posts({ currentUserId, userName , userProfileImageUrl , 
 
           <div className="flex gap-2 mt-auto">
             <input
-              className="flex-grow border rounded px-3 py-1"
+              className="flex-row border rounded px-3 py-1"
               placeholder="Add a comment..."
               value={commentInputs[post._id] || ""}
               onChange={e =>
