@@ -1,11 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Mail, PhoneCall, MapPin, Send, ArrowLeft , LifeBuoy } from "lucide-react";
 import Link from "next/link";
-import SectionHeader from "@/global/SectionHeader";
-import { FaInstagram, FaTwitter, FaGithub, FaLinkedin } from "react-icons/fa";
+import {
+  ArrowLeft,
+  Mail,
+  MapPin,
+  LifeBuoy,
+  Send,
+  Clock3,
+  Sparkles,
+} from "lucide-react";
+import SiteFooter from "@/global/SiteFooter";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -18,10 +24,9 @@ export default function ContactUs() {
   const [success, setSuccess] = useState<null | boolean>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const inputClassNames =
-    "w-full rounded border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-shadow p-3";
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -52,220 +57,229 @@ export default function ContactUs() {
     }
   };
 
+  const inputClassNames =
+    "w-full rounded-2xl border border-white/10 bg-black/30 px-5 py-4 text-white placeholder:text-zinc-500 outline-none transition focus:border-cyan-500/40";
+
   return (
     <>
-    <header className="p-6 flex items-center gap-3">
-      <Link
-        href="/"
-        className="flex items-center gap-2 mt-5 underline text-cyan-500 hover:text-cyan-800 transition"
-      >
-        <ArrowLeft className="w-5 h-5" /> Back
-      </Link>
-    </header>
-    <div className="max-w-5xl mx-auto my-20 p-8 rounded-3xl hover:shadow-[0_0_20px_3px_rgba(6,182,212,0.8),0_8px_32px_0_rgba(6,182,212,0.28)] transition-shadow duration-300 ease-in-out border-1 hover:border-cyan-300 bg-cyan-100/30  border-cyan-100">
-      {/* <h1 className="text-4xl font-extrabold text-cyan-700 mb-4">Contact Us</h1> */}
-      <SectionHeader title={"Contact Us"} icon={<LifeBuoy/>} />
-      <p className="mb-8 text-gray-700 max-w-xl">
-        Need assistance? <br/> Our dedicated support team <br/> (email: <a className="text-cyan-600 hover:underline" href="mailto:aaryan_bairagi_it@mcoe.edu.in">aaryan_bairagi_it@mcoe.edu.in</a>) is here to help you with any questions or issues related to Social. Fill out the form below or reach out directly using the contact information.
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Contact Info */}
-        <div className="space-y-8">
-          <div className="flex items-start gap-4">
-            <MapPin className="w-6 h-6 text-cyan-500 mt-1" />
-            <div>
-              <h3 className="text-lg font-semibold mb-1">Our Location</h3>
-              <p className="text-gray-600">1186/A, Off J.M. Road, Shivajinagar, Pune, Maharashtra Pin- 411005.</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <PhoneCall className="w-6 h-6 text-cyan-500" />
-            <a href="tel:+1234567890" className="text-cyan-600 hover:underline">
-              +91 7588223224
-            </a>
-          </div>
-          <div className="flex items-center gap-4">
-            <Mail className="w-6 h-6 text-cyan-500" />
-            <a href="mailto:aaryan_bairagi_it@mcoe.edu.in" className="text-cyan-600 hover:underline">
-              aaryan_bairagi_it@moderncoe.edu.in
-            </a>
-          </div>
-        </div>
-
-        {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="name" className="block mb-2 font-semibold text-gray-700">
-              Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your full name"
-              value={formData.name}
-              onChange={handleChange}
-              className={inputClassNames}
-              required
-              disabled={submitting}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block mb-2 font-semibold text-gray-700">
-              Email <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="you@example.com"
-              value={formData.email}
-              onChange={handleChange}
-              className={inputClassNames}
-              required
-              disabled={submitting}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="subject" className="block mb-2 font-semibold text-gray-700">
-              Subject <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              placeholder="Brief summary"
-              value={formData.subject}
-              onChange={handleChange}
-              className={inputClassNames}
-              required
-              disabled={submitting}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="message" className="block mb-2 font-semibold text-gray-700">
-              Message <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Write your message here..."
-              value={formData.message}
-              onChange={handleChange}
-              rows={5}
-              className={inputClassNames + " resize-y"}
-              required
-              disabled={submitting}
-            />
-          </div>
-
-          {error && <p className="text-sm text-red-600">{error}</p>}
-          {success && <p className="text-sm text-green-600">Message sent successfully! We'll get back to you soon.</p>}
-          
-          <div className="flex justify-end">
-          <Button
-            type="submit"
-            disabled={submitting}
-            className="bg-cyan-600 hover:bg-cyan-700 px-5 py-2 rounded-lg text-lg font-semibold shadow hover:shadow-cyan-200 transition flex justify-center items-center gap-2"
+      <main className="min-h-screen bg-[#040b12] px-6 pb-20 pt-10 text-white">
+        <div className="mx-auto max-w-6xl">
+          <Link
+            href="/"
+            className="mb-10 inline-flex items-center gap-2 text-sm text-zinc-400 transition hover:text-cyan-400"
           >
-            {submitting ? (
-              <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v8H4z"
-                ></path>
-              </svg>
-            ) : null}
-            Send
-            <span><Send className="w-5 h-5"/></span>
-          </Button>
-          </div>
-        </form>
-      </div>
-    </div>
+            <ArrowLeft size={16} />
+            Back to Home
+          </Link>
 
-  <div className="bg-black border-t border-cyan-400">
+          {/* HERO */}
+          <section className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#060b16] p-10 md:p-14">
+            <div className="pointer-events-none absolute right-0 top-0 h-[320px] w-[320px] rounded-full bg-cyan-500/10 blur-[120px]" />
 
-  <section className="w-full text-white mt-5  bg-black backdrop-blur-md">
+            <div className="relative z-10">
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm text-cyan-300">
+                {/* <Sparkles className="h-4 w-4" /> */}
+                Social Support Center
+              </div>
 
-  {/* TOP ROW */}
-  <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-8">
+              <div className="max-w-3xl">
+                <h1 className="mb-6 text-4xl font-bold leading-tight md:text-5xl">
+                  Need a hand? We&apos;re here to help.
+                </h1>
+                <p className="text-lg leading-8 text-zinc-400">
+                  Questions about your account, connections, messaging, or
+                  anything else on Social — reach out and we&apos;ll get back
+                  to you.
+                </p>
+              </div>
+            </div>
+          </section>
 
-    {/* LEFT */}
-    <div className="text-center md:text-left">
-      <h2 className="text-xl font-bold text-white/80">Social</h2>
-      <p className="text-sm text-white/80 mt-1">
-        Connect. Collaborate. Grow within your campus.
-      </p>
-    </div>
+          {/* MAIN GRID */}
+          <section className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+            {/* INFO */}
+            <div className="rounded-[32px] border border-white/10 bg-[#070c16] p-8 md:p-10">
+              <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">
+                Support Information
+              </p>
+              <h2 className="mb-10 text-3xl font-bold">Get in touch.</h2>
 
-    {/* RIGHT */}
-    <div className="flex gap-6 text-sm text-white/80">
-      <a href="/features" className="hover:text-cyan-400 transition">Features</a>
-      <a href="/contact-us" className="hover:text-cyan-400 transition">Contact</a>
-      <a href="/learn-more" className="hover:text-cyan-400 transition">About</a>
-    </div>
+              <div className="space-y-9">
+                <InfoRow icon={MapPin} title="Location">
+                  1186/A, Off J.M. Road, Shivajinagar, Pune, Maharashtra – 411005
+                </InfoRow>
 
-  </div>
+                <InfoRow icon={Mail} title="Email Support">
+                  <a
+                    href="mailto:aaryan_bairagi_it@mcoe.edu.in"
+                    className="text-cyan-300 hover:underline"
+                  >
+                    aaryan_bairagi_it@mcoe.edu.in
+                  </a>
+                </InfoRow>
 
-  {/* SOCIAL ROW — EXACT SAME STYLE AS YOUR PAGE */}
-  <div className="flex items-center justify-center gap-6 pb-8">
-    <span className="text-white/70">Follow Us : </span>
-    <a href="https://github.com/AaryanBairagi" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white hover:bg-cyan-100 transition shadow-sm hover:shadow-md">
-      <FaGithub className="w-5 h-5 text-zinc-700" />
-    </a>
+                <InfoRow icon={Clock3} title="Response Time">
+                  Usually within 24 hours for all support requests.
+                </InfoRow>
 
-    <a href="https://www.linkedin.com/in/aaryan-bairagi-183249249/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white hover:bg-cyan-100 transition shadow-sm hover:shadow-md">
-      <FaLinkedin className="w-5 h-5 text-blue-500" />
-    </a>
+                <InfoRow icon={LifeBuoy} title="What we help with">
+                  <ul className="space-y-2">
+                    <li>• Account & login issues</li>
+                    <li>• Connections & messaging problems</li>
+                    <li>• Notes, files, and uploads</li>
+                    <li>• Bug reports & feedback</li>
+                  </ul>
+                </InfoRow>
+              </div>
+            </div>
 
-    <a href="https://x.com/aaryanb4real" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white hover:bg-cyan-100 transition shadow-sm hover:shadow-md">
-      <FaTwitter className="w-5 h-5 text-gray-700" />
-    </a>
+            {/* FORM */}
+            <div className="rounded-[32px] border border-white/10 bg-[#0a0f1a] p-8 md:p-10">
+              <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">
+                Support Form
+              </p>
+              <h2 className="mb-10 text-3xl font-bold">Send a message.</h2>
 
-    <a href="https://www.instagram.com/aaryanb4real/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white hover:bg-cyan-100 transition shadow-sm hover:shadow-md">
-      <FaInstagram className="w-5 h-5 text-pink-600" />
-    </a>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="text-sm text-zinc-400">
+                    Full Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Your full name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={inputClassNames}
+                    required
+                    disabled={submitting}
+                  />
+                </div>
 
-  </div>
-  </section>
-  <hr className="border-0.5 border-white/60 border-t" />
-  {/* BOTTOM */}
-  <footer className="text-center py-10 text-sm text-white hover:text-white/90">
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm text-zinc-400">
+                    Email Address
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={inputClassNames}
+                    required
+                    disabled={submitting}
+                  />
+                </div>
 
-    <div>
-      © {new Date().getFullYear()} Social · All Rights Reserved
-    </div>
+                <div className="space-y-2">
+                  <label htmlFor="subject" className="text-sm text-zinc-400">
+                    Subject
+                  </label>
+                  <input
+                    id="subject"
+                    name="subject"
+                    type="text"
+                    placeholder="Brief summary"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className={inputClassNames}
+                    required
+                    disabled={submitting}
+                  />
+                </div>
 
-    <div className="mt-1">
-      Made with <span className="text-cyan-500">🩵</span> by{" "}
-      <span className="font-medium text-cyan-400">
-        Aaryan Bairagi
-      </span>
-    </div>
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm text-zinc-400">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={6}
+                    placeholder="Describe your issue or request..."
+                    value={formData.message}
+                    onChange={handleChange}
+                    className={inputClassNames + " resize-none"}
+                    required
+                    disabled={submitting}
+                  />
+                </div>
 
-  </footer>
+                {error && <p className="text-sm text-red-400">{error}</p>}
+                {success && (
+                  <p className="text-sm text-emerald-400">
+                    Message sent successfully! We&apos;ll get back to you soon.
+                  </p>
+                )}
 
-    </div>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="flex h-[60px] w-full items-center justify-center gap-3 rounded-2xl bg-cyan-600 text-lg font-medium text-white transition hover:bg-cyan-500 disabled:opacity-60"
+                >
+                  {submitting ? (
+                    <svg
+                      className="h-5 w-5 animate-spin text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      />
+                    </svg>
+                  ) : (
+                    <>
+                      Send Message
+                      <Send size={18} />
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+          </section>
+        </div>
+      </main>
 
+      <SiteFooter />
     </>
   );
 }
+
+function InfoRow({
+  icon: Icon,
+  title,
+  children,
+}: {
+  icon: React.ElementType;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex gap-5">
+      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-cyan-500/20 bg-cyan-500/10">
+        <Icon className="text-cyan-300" size={22} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-lg font-semibold">{title}</h3>
+        <div className="leading-7 text-zinc-400">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+

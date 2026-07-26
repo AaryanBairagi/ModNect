@@ -303,18 +303,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/[0.07] bg-black">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 px-6 py-12 md:flex-row">
-        <div className="text-center md:text-left">
-          <h2 className={`${display.className} text-xl font-bold text-white/80`}>Social</h2>
-          <p className="mt-1 text-sm text-white/40">Connect. Collaborate. Grow within your campus.</p>
-        </div>
-        <div className="flex gap-6 text-sm text-white/50">
-          <a href="/features" className="transition hover:text-cyan-400">Features</a>
-          <a href="/contact-us" className="transition hover:text-cyan-400">Contact</a>
-          <a href="/learn-more" className="transition hover:text-cyan-400">About</a>
-        </div>
-      </div>
+    <footer className="pt-5 border-t border-white/[0.07] bg-black">
 
       <div className="flex items-center justify-center gap-6 pb-10">
         <span className="text-white/40">Follow us:</span>
@@ -337,8 +326,8 @@ function Footer() {
       </div>
 
       <div className="border-t border-white/[0.06]" />
-      <div className="py-8 text-center text-sm text-white/40">
-        <div>© {new Date().getFullYear()} Social · All Rights Reserved</div>
+      <div className="py-6 text-center text-sm text-white/40">
+        <div>© {new Date().getFullYear()} Social v3.0 · All Rights Reserved</div>
         <div className="mt-1">
           Made with <span className="text-cyan-400">🩵</span> by{" "}
           <span className="font-medium text-cyan-300">Aaryan Bairagi</span>
