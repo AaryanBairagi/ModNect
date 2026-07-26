@@ -8,17 +8,13 @@ import { useAuth } from '@/contexts/AuthContext'
 
 const Feed  = () => {
     const { user } = useAuth();
-    const [createdAt, setCreatedAt] = React.useState("");
     const currentUserId = user?._id;
     
   return (
     <>
-
-
-    {/* <div className='flex flex-col gap-4  bg-white/60 rounded-lg drop-shadow-lg'> */}
     <div className="pt-6 flex flex-col gap-6 bg-white/60 rounded-lg items-center max-w-6xl drop-shadow-lg border-gray-200">
       {currentUserId && 
-        <WhatsNewModal userId={currentUserId} createdAt={createdAt} />
+        <WhatsNewModal userId={currentUserId} createdAt={user?.createdAt} />
       }
 
       <div className="w-full max-w-6xl">{currentUserId && <StoryBar userId={currentUserId} />}</div>

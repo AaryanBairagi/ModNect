@@ -15,8 +15,6 @@ import {
 const features = [
   { icon: MessageCircle, text: "Encrypted real-time messaging" },
   { icon: Image, text: "Share stories & stay connected" },
-  { icon: Users, text: "Create groups & collaborate" },
-  { icon: Network, text: "Visualize your network" },
   { icon: Trophy, text: "Showcase your achievements" },
   { icon: Calendar, text: "Create & join events" },
   { icon: FileText, text: "Smart file sharing & previews" },
@@ -36,9 +34,6 @@ export default function WhatsNewModal({ userId, createdAt }: any) {
 
     const key = `whatsNewSeen_${userId}`;
     const seen = localStorage.getItem(key);
-    
-    console.log("createdAt:", createdAt);
-    console.log("userId:", userId);
 
     if (now - createdTime <= THREE_DAYS && !seen) {
       setOpen(true);
@@ -49,8 +44,7 @@ export default function WhatsNewModal({ userId, createdAt }: any) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-start pt-10 justify-center z-50">
-
+<div className="fixed inset-0 flex justify-center items-center bg-black/70 z-[9999]">
       <div className="bg-white w-[400px] rounded-xl p-6 shadow-2xl">
 
         <h2 className="text-xl text-center font-bold text-gray-800 mb-4">

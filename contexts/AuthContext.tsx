@@ -19,6 +19,7 @@ type User = {
   profilePhoto?: string;
   bio?: string;
   interests?: string[];
+  createdAt?: string;
 };
 
 type AuthContextType = {
@@ -171,3 +172,4 @@ export function useAuth() {
 
   return context;
 }
+

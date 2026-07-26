@@ -362,7 +362,7 @@ const faqs = [
   { q: "What is Social?", a: "Social is a campus-focused platform that helps students connect, collaborate, and discover opportunities in one place." },
   { q: "Is Social only for students?", a: "Primarily yes — but mentors, alumni, and clubs can also join to guide and collaborate with students." },
   { q: "Is my data secure?", a: "Yes. Social is built privacy-first, with secure authentication and encrypted communication end to end." },
-  { q: "Can I use Social for projects and groups?", a: "Absolutely — create groups, share files, and collaborate in real time from a single thread." },
+  { q: "Can I use Social for projects?", a: "Absolutely — share files, and collaborate in real time from a single thread." },
 ];
 
 const shipped = [
