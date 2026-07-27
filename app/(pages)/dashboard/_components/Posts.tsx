@@ -487,7 +487,7 @@ export default function Posts({ currentUserId, userName , userProfileImageUrl , 
           </button>
           )}
 
-        {isOwner && post.type === "post" && (
+        {isOwner && post.type === "post" && !isArchiveView && (
           <button
             onClick={() => handleArchivePost(post._id)}
             className="flex items-center text-gray-600 gap-1 hover:text-cyan-600 transition-colors duration-300 "
