@@ -143,7 +143,7 @@ return (
 
       <div className="absolute w-full left-0 top-0 flex flex-col items-center pt-10 z-20">
         <div className="px-5 py-2 rounded-2xl bg-white/80 backdrop-blur-3xl">
-          <h1 className="text-3xl md:text-4xl font-extrabold bg-cyan-500 text-transparent bg-clip-text text-center">
+          <h1 className="text-3xl md:text-4xl font-extrabold bg-cyan-600 text-transparent bg-clip-text text-center">
             Sign Up for Social
           </h1>
 
@@ -170,10 +170,10 @@ return (
           zIndex: 15,
         }}
       >
-        <div className="bg-white/20 rounded-2xl shadow-lg backdrop-blur-sm min-h-[760px]">
+        <div className=" bg-white/20 rounded-2xl shadow-lg backdrop-blur-sm min-h-[760px]">
           <form
             onSubmit={handleSubmit}
-            className="bg-white rounded-2xl p-8 shadow-xl"
+            className="pt-40 bg-white rounded-2xl p-8 shadow-xl"
           >
             <div className="grid grid-cols-2 gap-3 mb-4">
               <div>
@@ -351,14 +351,16 @@ return (
                 </Link>
               </p>
 
-              <div className="mt-8 border-t pt-5">
-                <p className="text-sm text-gray-500">
+                              <p className="text-sm text-gray-500">
                   Secured by{" "}
                   <span className="font-semibold text-cyan-600">
                     Social
                   </span>
                 </p>
-              </div>
+{/* 
+              <div className="mt-8 border-t pt-5">
+
+              </div> */}
             </div>
           </form>
         </div>

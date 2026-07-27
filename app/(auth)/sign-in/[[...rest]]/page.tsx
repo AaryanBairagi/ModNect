@@ -216,16 +216,12 @@ export default function SignInPage() {
                   </Link>
                 </p>
 
-                <div className="mt-8 border-t pt-5">
-
                   <p className="text-sm text-gray-500">
                     Secured by{" "}
                     <span className="font-semibold text-cyan-600">
                       Social
                     </span>
                   </p>
-
-                </div>
 
               </div>
 
