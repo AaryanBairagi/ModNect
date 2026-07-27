@@ -1,29 +1,35 @@
-import { z } from "zod";
 import { NextResponse } from "next/server";
+import { z } from "zod";
 
-type ValidationResult<T> =
+export function validate<T extends z.ZodTypeAny>(
+  schema: T,
+  data: unknown
+):
   | {
       success: true;
-      data: T;
+      data: z.infer<T>;
     }
   | {
       success: false;
       response: NextResponse;
-    };
+    } {
 
-export function validate<T>(
-  schema: z.ZodType<T>,
-  body: unknown
-): ValidationResult<T> {
-  const parsed = schema.safeParse(body);
+  const result = schema.safeParse(data);
 
-  if (!parsed.success) {
+  if (!result.success) {
+
+    const formattedErrors = result.error.issues.map((issue) => ({
+      field: issue.path.join("."),
+      message: issue.message,
+    }));
+
     return {
       success: false,
       response: NextResponse.json(
         {
           success: false,
-          errors: parsed.error.flatten(),
+          message: formattedErrors[0].message, // First error
+          errors: formattedErrors,             // All errors
         },
         {
           status: 400,
@@ -34,6 +40,6 @@ export function validate<T>(
 
   return {
     success: true,
-    data: parsed.data,
+    data: result.data,
   };
 }

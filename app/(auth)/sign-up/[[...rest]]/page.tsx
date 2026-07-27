@@ -5,6 +5,32 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { PasswordSchema } from "@/lib/validators/common";
+import { Eye, EyeOff, Check, X } from "lucide-react";
+
+function PasswordRule({
+  ok,
+  text,
+}: {
+  ok: boolean;
+  text: string;
+}) {
+  return (
+    <div
+      className={`flex items-center gap-2 text-sm transition-colors ${
+        ok ? "text-green-600" : "text-gray-500"
+      }`}
+    >
+      {ok ? (
+        <Check className="w-4 h-4" />
+      ) : (
+        <X className="w-4 h-4" />
+      )}
+
+      <span>{text}</span>
+    </div>
+  );
+}
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -14,11 +40,36 @@ export default function SignUpPage() {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState(false);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const passwordChecks = {
+    length: password.length >= 8,
+    uppercase: /[A-Z]/.test(password),
+    lowercase: /[a-z]/.test(password),
+    number: /\d/.test(password),
+    special:
+      /[!@#$%^&*()_\-+=\[\]{};:'",.<>/?\\|`~]/.test(password),
+  };
+
+  const isPasswordValid =
+    passwordChecks.length &&
+    passwordChecks.uppercase &&
+    passwordChecks.lowercase &&
+    passwordChecks.number &&
+    passwordChecks.special;
+
+  const passwordsMatch =
+    confirmPassword.length === 0 ||
+    password === confirmPassword;
 
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>
@@ -26,6 +77,13 @@ export default function SignUpPage() {
     e.preventDefault();
 
     setError("");
+
+    const validation = PasswordSchema.safeParse(password);
+
+    if (!validation.success) {
+      setError(validation.error.issues[0].message);
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
@@ -52,7 +110,7 @@ export default function SignUpPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message || "Registration failed");
+        setError(data.message || "Registration failed.");
         setLoading(false);
         return;
       }
@@ -64,203 +122,248 @@ export default function SignUpPage() {
     } catch (err) {
       console.error(err);
       setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   }
+return (
+  <div className="min-h-screen flex items-center justify-center bg-[#e0f2fe] p-8">
+    <div
+      className="relative w-[1150px] h-[1000px] rounded-3xl shadow-2xl overflow-hidden flex items-center justify-center transition-shadow duration-300 hover:drop-shadow-[0_0_24px_#22d3ee]"
+    >
+      <Image
+        src="/SignUpImage.jpg"
+        alt="Sign Up"
+        fill
+        priority
+        className="object-cover"
+      />
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-[#e0f2fe] p-8">
+      <div className="absolute top-0 left-0 w-full h-[130px] bg-gradient-to-b from-white/85 via-white/70 to-transparent z-10 pointer-events-none" />
 
-      <div
-        className="
-          relative
-          w-[1150px]
-          h-[1000px]
-          rounded-3xl
-          shadow-2xl
-          overflow-hidden
-          flex
-          items-center
-          justify-center
-          transition-shadow
-          duration-300
-          hover:drop-shadow-[0_0_24px_#22d3ee]"
-      >
+      <div className="absolute w-full left-0 top-0 flex flex-col items-center pt-10 z-20">
+        <div className="px-5 py-2 rounded-2xl bg-white/80 backdrop-blur-3xl">
+          <h1 className="text-3xl md:text-4xl font-extrabold bg-cyan-500 text-transparent bg-clip-text text-center">
+            Sign Up for Social
+          </h1>
 
-        <Image
-          src="/SignUpImage.jpg"
-          alt="Sign Up"
-          fill
-          priority
-          className="object-cover"
-        />
-
-        <div className="absolute top-0 left-0 w-full h-[130px] bg-gradient-to-b from-white/85 via-white/70 to-transparent z-10 pointer-events-none" />
-
-        <div className="absolute w-full left-0 top-0 flex flex-col items-center pt-10 z-20">
-
-          <div className="px-5 py-2 rounded-2xl bg-white/80 backdrop-blur-3xl">
-
-            <h1 className="text-3xl md:text-4xl font-extrabold bg-cyan-500 text-transparent bg-clip-text text-center">
-              Sign Up for Social
-            </h1>
-
-            <p className="text-gray-700 text-base md:text-lg font-medium text-center max-w-lg mt-1">
-              Welcome! Join your campus network,
-              <span className="text-cyan-600 font-semibold"> connect </span>
-              and unlock
-              <span className="text-cyan-600 font-semibold">
-                {" "}exclusive student features
-              </span>.
-            </p>
-
-          </div>
-
+          <p className="text-gray-700 text-base md:text-lg font-medium text-center max-w-lg mt-1">
+            Welcome! Join your campus network,
+            <span className="text-cyan-600 font-semibold">
+              {" "}connect{" "}
+            </span>
+            and unlock
+            <span className="text-cyan-600 font-semibold">
+              {" "}exclusive student features
+            </span>.
+          </p>
         </div>
-
-        <div
-          className="absolute"
-          style={{
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%)",
-            width: "38%",
-            zIndex: 15,
-          }}
-        >
-
-          <div className="bg-white/20 rounded-2xl shadow-lg backdrop-blur-sm min-h-[650px]">
-
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white rounded-2xl p-8 shadow-xl"
-            >
-
-              <div className="mt-2 grid grid-cols-2 gap-3 mb-4">
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    First Name
-                  </label>
-
-                  <input
-                    required
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name
-                  </label>
-
-                  <input
-                    required
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="w-full rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
-                  />
-                </div>
-
-              </div>
-
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Username
-              </label>
-
-              <input
-                required
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full mb-4 rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
-              />
-
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
-              </label>
-
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full mb-4 rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
-              />
-
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full mb-4 rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
-              />
-
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Confirm Password
-              </label>
-
-              <input
-                type="password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
-              />
-
-              {error && (
-                <div className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
-                  {error}
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="mt-6 w-full rounded-lg bg-cyan-600 hover:bg-cyan-700  py-3 font-semibold text-white shadow-md transition-all disabled:opacity-70"
-              >
-                {loading ? "Creating Account..." : "Continue"}
-              </button>
-
-              <div className="mt-8 border-t pt-6 text-center">
-
-                <p className="text-sm text-gray-600">
-                  Already have an account?{" "}
-                  <Link
-                    href="/sign-in"
-                    className="font-semibold text-cyan-600 hover:text-cyan-700"
-                  >
-                    Sign In
-                  </Link>
-                </p>
-
-                <div className="mt-8 border-t pt-5">
-
-                  <p className="text-sm text-gray-500">
-                    Secured by{" "}
-                    <span className="font-semibold text-cyan-600">
-                      Social
-                    </span>
-                  </p>
-
-                </div>
-
-              </div>
-
-            </form>
-
-          </div>
-
-        </div>
-
       </div>
 
+      <div
+        className="absolute"
+        style={{
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%,-50%)",
+          width: "38%",
+          zIndex: 15,
+        }}
+      >
+        <div className="bg-white/20 rounded-2xl shadow-lg backdrop-blur-sm min-h-[760px]">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white rounded-2xl p-8 shadow-xl"
+          >
+            <div className="grid grid-cols-2 gap-3 mb-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  First Name
+                </label>
+
+                <input
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="w-full rounded-lg border bg-gray-100 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  Last Name
+                </label>
+
+                <input
+                  required
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="w-full rounded-lg border bg-gray-100 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
+                />
+              </div>
+            </div>
+
+            <label className="block text-sm font-medium mb-2">
+              Username
+            </label>
+
+            <input
+              required
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full mb-4 rounded-lg border bg-gray-100 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
+            />
+
+            <label className="block text-sm font-medium mb-2">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full mb-4 rounded-lg border bg-gray-100 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
+            />
+
+            <label className="block text-sm font-medium mb-2">
+              Password
+            </label>
+
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                required
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setError("");
+                }}
+                className="w-full rounded-lg border bg-gray-100 px-4 py-3 pr-12 focus:ring-2 focus:ring-cyan-500 outline-none"
+              />
+
+              <button
+                type="button"
+                onClick={() =>
+                  setShowPassword((prev) => !prev)
+                }
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+              >
+                {showPassword ? (
+                  <EyeOff size={20} />
+                ) : (
+                  <Eye size={20} />
+                )}
+              </button>
+            </div>
+
+            <div className="mt-3 space-y-2 mb-5">
+              <PasswordRule
+                ok={passwordChecks.length}
+                text="Minimum 8 characters"
+              />
+
+              <PasswordRule
+                ok={passwordChecks.uppercase}
+                text="One uppercase letter"
+              />
+
+              <PasswordRule
+                ok={passwordChecks.lowercase}
+                text="One lowercase letter"
+              />
+
+              <PasswordRule
+                ok={passwordChecks.number}
+                text="One number"
+              />
+
+              <PasswordRule
+                ok={passwordChecks.special}
+                text="One special character"
+              />
+            </div>
+
+            <label className="block text-sm font-medium mb-2">
+              Confirm Password
+            </label>
+
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                required
+                value={confirmPassword}
+                onChange={(e) =>
+                  setConfirmPassword(e.target.value)
+                }
+                className="w-full rounded-lg border bg-gray-100 px-4 py-3 pr-12 focus:ring-2 focus:ring-cyan-500 outline-none"
+              />
+
+              <button
+                type="button"
+                onClick={() =>
+                  setShowConfirmPassword((prev) => !prev)
+                }
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+              >
+                {showConfirmPassword ? (
+                  <EyeOff size={20} />
+                ) : (
+                  <Eye size={20} />
+                )}
+              </button>
+            </div>
+
+            {!passwordsMatch && (
+              <p className="text-red-500 text-sm mt-2">
+                Passwords do not match.
+              </p>
+            )}
+
+            {error && (
+              <div className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={
+                loading ||
+                !isPasswordValid ||
+                !passwordsMatch
+              }
+              className="mt-6 w-full rounded-lg bg-cyan-600 hover:bg-cyan-700 py-3 font-semibold text-white shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading
+                ? "Creating Account..."
+                : "Continue"}
+            </button>
+
+            <div className="mt-8 border-t pt-6 text-center">
+              <p className="text-sm text-gray-600">
+                Already have an account?{" "}
+                <Link
+                  href="/sign-in"
+                  className="font-semibold text-cyan-600 hover:text-cyan-700"
+                >
+                  Sign In
+                </Link>
+              </p>
+
+              <div className="mt-8 border-t pt-5">
+                <p className="text-sm text-gray-500">
+                  Secured by{" "}
+                  <span className="font-semibold text-cyan-600">
+                    Social
+                  </span>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  );
+  </div>
+);
 }
