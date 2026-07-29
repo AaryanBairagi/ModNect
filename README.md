@@ -15,7 +15,7 @@
 ![JWT](https://img.shields.io/badge/Auth-JWT-22C55E)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 
-**[Live Demo](#) · [Report Bug](https://github.com/AaryanBairagi/social/issues)**
+**[Live Demo](https://social-omega-sage.vercel.app/) · [Report Bug](https://github.com/AaryanBairagi/social/issues)**
 
 </div>
 
